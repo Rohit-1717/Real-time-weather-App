@@ -17,9 +17,12 @@ function App() {
     setSteps([]);
 
     try {
-      const response = await axios.post("http://localhost:8000/api/weather", {
-        query: city,
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_WEATHER_SERVER}/api/weather`,
+        {
+          query: city,
+        }
+      );
 
       const data = response.data;
 
@@ -29,7 +32,7 @@ function App() {
       setWeatherData(data.result);
       setSteps(data.steps || []);
     } catch (err) {
-      setError("Failed to fetch weather.");
+      setError("Something went wrong!!");
     } finally {
       setLoading(false);
     }
